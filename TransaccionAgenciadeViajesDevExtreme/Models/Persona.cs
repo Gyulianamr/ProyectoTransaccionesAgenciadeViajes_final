@@ -75,6 +75,8 @@ namespace TransaccionAgenciadeViajesDevExtreme.Models
                     throw new ArgumentException("El teléfono debe contener exactamente 8 dígitos numéricos");
 
                 _telefono = value;
+
+                _telefono = value;
             }
         }
 
