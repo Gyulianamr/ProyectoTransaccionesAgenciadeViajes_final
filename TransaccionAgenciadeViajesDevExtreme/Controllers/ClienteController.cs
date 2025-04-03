@@ -99,6 +99,21 @@ namespace TransaccionAgenciadeViajesDevExtreme.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }
+        [HttpDelete]
+        public async Task<HttpResponseMessage> Delete(FormDataCollection form)
+        {
+            var key = Convert.ToInt32(form.Get("key"));
 
-    }
+            var apiUrlDelPeli = "https://localhost:44304/api/Cliente/" + key;
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
+            using (var client = new HttpClient(handler))
+            {
+                var respuestaPelic = await client.DeleteAsync(apiUrlDelPeli);
+            }
+            return Request.CreateResponse(HttpStatusCode.OK);
+
+        }
+
+        }
 }
