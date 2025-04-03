@@ -66,5 +66,30 @@ namespace TransaccionAgenciadeViajesDevExtreme.Controllers {
             return Request.CreateResponse(HttpStatusCode.Created);
         }
 
+        [HttpPut]
+        public async Task<HttpResponseMessage> Put(FormDataCollection form)
+        {
+            //Parámetros del form
+            var key = Convert.ToInt32(form.Get("key")); //llave que estoy modificando
+            var values = form.Get("values"); //Los valores que yo modifiqué en formato JSON
+
+            var apiUrlGetPeli = "https://localhost:44304/api/Cliente/" + key;
+            var respuestaPelic = await GetAsync(apiUrlGetPeli = "https://localhost:44304/api/Cliente/" + key);
+            Cliente cliente = JsonConvert.DeserializeObject<Cliente>(respuestaPelic);
+
+            JsonConvert.PopulateObject(values, cliente);
+
+            string jsonString = JsonConvert.SerializeObject(cliente);
+            var httpContent = new StringContent(jsonString, System.Text.Encoding.UTF8, "application/json");
+
+
+            var url = "https://localhost:44304/api/Cliente/" + key;
+            var response = await client.PutAsync(url, httpContent);
+
+            var result = response.Content.ReadAsStringAsync().Result;
+
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
     }
 }
