@@ -16,13 +16,14 @@
     .RemoteOperations(true)
     .Columns(columns => {
 
-        columns.AddFor(m => m.Ciudad);
 
         columns.AddFor(m => m.Id);
 
         columns.AddFor(m => m.Nombre);
 
         columns.AddFor(m => m.Apellido);
+        columns.AddFor(m => m.Ciudad);
+
 
         columns.AddFor(m => m.Telefono);
 
