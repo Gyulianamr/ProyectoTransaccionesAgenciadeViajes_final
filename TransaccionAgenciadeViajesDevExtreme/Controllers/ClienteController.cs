@@ -1,19 +1,20 @@
+﻿using DevExtreme.AspNet.Data;
+using DevExtreme.AspNet.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using TransaccionAgenciadeViajesDevExtreme.Models;
-using DevExtreme.AspNet.Data;
-using DevExtreme.AspNet.Mvc;
-using Newtonsoft.Json;
-using System.Threading.Tasks;
 
-namespace TransaccionAgenciadeViajesDevExtreme.Controllers {
-    public class SampleDataController : ApiController {
-
-        private static readonly HttpClient client = new HttpClient();
+namespace TransaccionAgenciadeViajesDevExtreme.Controllers
+{
+    public class ClienteController : ApiController
+    {
+       
         [HttpGet]
         public async Task<HttpResponseMessage> Get(DataSourceLoadOptions loadOptions)
         {
@@ -28,7 +29,6 @@ namespace TransaccionAgenciadeViajesDevExtreme.Controllers {
         {
             try
             {
-
                 var handler = new HttpClientHandler();
                 handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
                 using (var client = new HttpClient(handler))
@@ -38,8 +38,6 @@ namespace TransaccionAgenciadeViajesDevExtreme.Controllers {
                     return await response.Content.ReadAsStringAsync();
                 }
 
-                //var response = await client.GetAsync(uri);
-
             }
             catch (Exception e)
             {
@@ -48,6 +46,5 @@ namespace TransaccionAgenciadeViajesDevExtreme.Controllers {
             }
 
         }
-
     }
 }

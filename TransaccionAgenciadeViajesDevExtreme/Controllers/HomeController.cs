@@ -9,5 +9,11 @@ namespace TransaccionAgenciadeViajesDevExtreme.Controllers {
         public ActionResult Index() {
             return View();
         }
+
+        public ActionResult Cliente()
+        {
+            return View();
+        }
+
     }
 }
