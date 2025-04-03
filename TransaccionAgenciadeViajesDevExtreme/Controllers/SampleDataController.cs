@@ -9,6 +9,7 @@ using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Net.Http.Formatting;
 
 namespace TransaccionAgenciadeViajesDevExtreme.Controllers {
     public class SampleDataController : ApiController {
@@ -47,6 +48,22 @@ namespace TransaccionAgenciadeViajesDevExtreme.Controllers {
                 return null;
             }
 
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> Post(FormDataCollection form)
+        {
+
+            var values = form.Get("values");
+
+            var httpContent = new StringContent(values, System.Text.Encoding.UTF8, "application/json");
+
+            var url = "https://localhost:44304/api/Cliente";
+            var response = await client.PostAsync(url, httpContent);
+
+            var result = response.Content.ReadAsStringAsync().Result;
+
+            return Request.CreateResponse(HttpStatusCode.Created);
         }
 
     }
