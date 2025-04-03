@@ -14,11 +14,11 @@ namespace TransaccionAgenciadeViajesDevExtreme.Controllers
 {
     public class ClienteController : ApiController
     {
-       
         [HttpGet]
         public async Task<HttpResponseMessage> Get(DataSourceLoadOptions loadOptions)
         {
             var apiUrl = "https://localhost:44304/api/Cliente";
+
             var respuestaJson = await GetAsync(apiUrl);
             //System.Diagnostics.Debug.WriteLine(respuestaJson); imprimir info
             List<Cliente> listacliente = JsonConvert.DeserializeObject<List<Cliente>>(respuestaJson);
@@ -46,5 +46,6 @@ namespace TransaccionAgenciadeViajesDevExtreme.Controllers
             }
 
         }
+
     }
 }
